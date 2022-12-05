@@ -1,0 +1,12 @@
+
+.search-box {
+    margin: 20px 0;
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.monsters-search-box:focus {
+    outline: 2px solid rgb(46, 159, 219);
+}

@@ -1,17 +1,15 @@
+
+* {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-image: linear-gradient(120deg, rgb(7, 27, 82), rgb(0, 128, 128));
+}
+
 .App {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-    width: 400px;
-    margin: 20px auto;
-
     text-align: center;
 }
-
-.search-field {
-    margin: 20px 0;
-    padding: 4px;
-    font-size: 20px;
-}
-

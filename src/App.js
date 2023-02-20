@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 
 import './App.css';
 
-import CardList from './components/card-list/card-list.component';
 import SearchBox from './components/search-field/search-box.component';
+import Scroll from './components/scroll/scroll.component';
+import CardList from './components/card-list/card-list.component';
 
 
 function App() {
@@ -41,7 +42,9 @@ function App() {
                 onChangeHandler={ handleSearchChange }
             />
             
-            <CardList monsters={ filteredMonsters } />
+            <Scroll>
+                <CardList monsters={ filteredMonsters } />
+            </Scroll>
         </div>
     );
 }

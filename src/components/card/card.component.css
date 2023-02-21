@@ -21,6 +21,8 @@
 }
 
 .monster-email {
+    overflow: hidden;
     color: darkblue;
-    text-decoration: none;    
+    text-decoration: none;
+    text-overflow: ellipsis;
 }

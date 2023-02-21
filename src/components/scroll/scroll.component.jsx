@@ -1,7 +1,7 @@
 import React from 'react';
 import './scroll.styles.css';
 
-function Scroll(props) {
+const Scroll = (props) => {
     return (
         <div className="scroll-container">
             { props.children }

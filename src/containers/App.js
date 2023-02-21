@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 
 import './App.css';
 
-import SearchBox from './components/search-field/search-box.component';
-import Scroll from './components/scroll/scroll.component';
-import CardList from './components/card-list/card-list.component';
+import SearchBox from '../components/search-field/search-box.component';
+import Scroll from '../components/scroll/scroll.component';
+import CardList from '../components/card-list/card-list.component';
 
 
 function App() {

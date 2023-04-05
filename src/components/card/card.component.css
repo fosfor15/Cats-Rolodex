@@ -16,11 +16,11 @@
     transform: scale(1.05);
 }
 
-.monster-name {
+.cat-name {
     color: rgb(20, 20, 20);
 }
 
-.monster-email {
+.cat-email {
     overflow: hidden;
     color: darkblue;
     text-decoration: none;

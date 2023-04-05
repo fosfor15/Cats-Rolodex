@@ -4,13 +4,13 @@ const Card = ({ id, name, email }) => (
     <div className="card">
         <img
             src={ `https://robohash.org/${ id + 10 }?set=set4&size=180x180` }
-            alt={ `Monster ${ name }` }
+            alt={ `Cat ${ name }` }
         />
-        <h2 className="monster-name">
+        <h2 className="cat-name">
             { name }
         </h2>
         <a
-            className="monster-email"
+            className="cat-email"
             href={ `mailto:${ email }` }
             onClick={ event => {
                 event.preventDefault();

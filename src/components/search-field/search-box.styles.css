@@ -8,6 +8,6 @@
     font-size: 20px;
 }
 
-.monsters-search-box:focus {
+.cats-search-box:focus {
     outline: 2px solid rgb(46, 159, 219);
 }

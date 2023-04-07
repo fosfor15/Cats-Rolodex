@@ -1,14 +1,32 @@
 import { useState, useEffect } from 'react';
 
-import './App.css';
-
 import SearchBox from '../components/search-field/search-box.component';
 import Scroll from '../components/scroll/scroll.component';
 import CardList from '../components/card-list/card-list.component';
+import './App.css';
+
+import { connect } from 'react-redux';
+import { setSearchField } from '../state/actions';
 
 
-function App() {
-    const [ searchField, setSearchField ] = useState('');
+const mapStateToProps = (state) => {
+    return {
+        searchField: state.searchField
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleSearchChange: event => dispatch(
+            setSearchField(event.target.value.toLowerCase())
+        )
+    };
+};
+
+
+function App(props) {
+    const { searchField, handleSearchChange } = props;
+    
     const [ cats, setCats ] = useState([]);
     const [ filteredCats, setFilteredCats ] = useState(cats);
 
@@ -21,14 +39,8 @@ function App() {
     useEffect(() => {
         const newFilteredCats = cats.filter(cat => 
             cat.name.toLowerCase().includes(searchField));
-        
-            setFilteredCats(newFilteredCats);
+        setFilteredCats(newFilteredCats);
     }, [ cats, searchField ]);
-
-    const handleSearchChange = event => {
-        const newSearchField = event.target.value.toLowerCase();
-        setSearchField(newSearchField);
-    };
 
     return (
         <div className="App">
@@ -49,4 +61,4 @@ function App() {
     );
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

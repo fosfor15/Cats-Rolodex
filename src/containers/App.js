@@ -48,7 +48,7 @@ function App() {
                         <CardList cats={ getFilteredCats() } />
                     </Scroll>
                 </> :
-                <p className="white">{ error }</p>
+                <h2 className="white">{ error.message }</h2>
             }
         </div>
     );

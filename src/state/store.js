@@ -1,12 +1,16 @@
-import { applyMiddleware, createStore, compose } from 'redux';
+import { applyMiddleware, createStore, combineReducers, compose } from 'redux';
 import { logger } from 'redux-logger';
+import thunk from 'redux-thunk';
 
 import { searchCats } from './reducers';
+import { requestCats } from './reducers';
+
+const rootReducer = combineReducers({ searchCats, requestCats });
 
 export const store = createStore(
-    searchCats,
+    rootReducer,
     compose(
-        window.__REDUX_DEVTOOLS_EXTENSION__(),
-        applyMiddleware(logger)
+        applyMiddleware(thunk, logger),
+        window.__REDUX_DEVTOOLS_EXTENSION__()
     )
 );

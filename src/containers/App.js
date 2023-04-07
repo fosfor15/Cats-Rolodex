@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import SearchBox from '../components/search-field/search-box.component';
 import Scroll from '../components/scroll/scroll.component';
@@ -6,18 +6,24 @@ import CardList from '../components/card-list/card-list.component';
 import './App.css';
 
 import { connect } from 'react-redux';
-import { setSearchField } from '../state/actions';
+import { requestCats, setSearchField } from '../state/actions';
 
 
 const mapStateToProps = (state) => {
     return {
-        searchField: state.searchField
+        isPending: state.requestCats.isPending,
+        cats: state.requestCats.cats,
+        error: state.requestCats.error,
+        searchField: state.searchCats.searchField
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleSearchChange: event => dispatch(
+        handleRequestCats: () => {
+            dispatch(requestCats())
+        },
+        handleSearchCat: event => dispatch(
             setSearchField(event.target.value.toLowerCase())
         )
     };
@@ -25,22 +31,19 @@ const mapDispatchToProps = (dispatch) => {
 
 
 function App(props) {
-    const { searchField, handleSearchChange } = props;
-    
-    const [ cats, setCats ] = useState([]);
-    const [ filteredCats, setFilteredCats ] = useState(cats);
+    const {
+        isPending,
+        cats,
+        error,
+        handleRequestCats,
+        searchField,
+        handleSearchCat
+    } = props;
 
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(users => setCats(users));
-    }, []);
+    useEffect(handleRequestCats, []);
 
-    useEffect(() => {
-        const newFilteredCats = cats.filter(cat => 
-            cat.name.toLowerCase().includes(searchField));
-        setFilteredCats(newFilteredCats);
-    }, [ cats, searchField ]);
+    const getFilteredCats = () => 
+        cats.filter(cat => cat.name.toLowerCase().includes(searchField));
 
     return (
         <div className="App">
@@ -48,15 +51,22 @@ function App(props) {
                 Cats Rolodex
             </h1>
 
-            <SearchBox
-                className="cats-search-box"
-                placeholder="Search for cats"
-                onChangeHandler={ handleSearchChange }
-            />
-            
-            <Scroll>
-                <CardList cats={ filteredCats } />
-            </Scroll>
+            { isPending ?
+                <h2 className="white">Loading...</h2> :
+            !error ?
+                <>
+                    <SearchBox
+                        className="cats-search-box"
+                        placeholder="Search for cats"
+                        onChangeHandler={ handleSearchCat }
+                    />
+
+                    <Scroll>
+                        <CardList cats={ getFilteredCats() } />
+                    </Scroll>
+                </> :
+                <p className="white">{ error }</p>
+            }
         </div>
     );
 }

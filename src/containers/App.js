@@ -1,5 +1,6 @@
 import { useEffect, lazy } from 'react';
 
+import Header from '../components/header/Header';
 import SearchBox from '../components/search-field/search-box.component';
 import Scroll from '../components/scroll/scroll.component';
 import './App.css';
@@ -20,7 +21,7 @@ function App() {
 
     useEffect(() => {
         dispatch(requestCats());
-    }, []);
+    }, [ dispatch ]);
 
     const handleSearchCat = (event) => dispatch(
         setSearchField(event.target.value.toLowerCase())
@@ -31,9 +32,7 @@ function App() {
 
     return (
         <div className="App">
-            <h1 className="app-title">
-                Cats Rolodex
-            </h1>
+            <Header />
 
             { isPending ?
                 <h2 className="white">Loading...</h2> :

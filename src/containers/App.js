@@ -1,12 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, lazy } from 'react';
 
 import SearchBox from '../components/search-field/search-box.component';
 import Scroll from '../components/scroll/scroll.component';
-import CardList from '../components/card-list/card-list.component';
 import './App.css';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { requestCats, setSearchField } from '../state/actions';
+
+const CardList = lazy(() => import('../components/card-list/card-list.component'));
 
 
 function App() {

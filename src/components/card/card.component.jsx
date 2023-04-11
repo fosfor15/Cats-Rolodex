@@ -3,8 +3,10 @@ import './card.component.css';
 const Card = ({ id, name, email }) => (
     <div className="card">
         <img
-            src={ `https://robohash.org/${ id + 10 }?set=set4&size=180x180` }
+            src={ `https://robohash.org/${ id + 10 }?set=set4&size=140x140` }
             alt={ `Cat ${ name }` }
+            width="140"
+            height="140"
         />
         <h2 className="cat-name">
             { name }

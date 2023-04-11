@@ -7,6 +7,8 @@ import { store } from './state/store';
 import App from './containers/App';
 import './index.css';
 
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+
 
 const root = ReactDOM.createRoot(
     document.getElementById('root')
@@ -19,3 +21,5 @@ root.render(
         </Provider>
     </React.StrictMode>
 );
+
+serviceWorkerRegistration.register();

@@ -1,10 +1,17 @@
 import Card from '../card/card.component';
 import './card-list.styles.css';
 
-const CardList = ({ cats }) => (
+import { Cat } from '../../containers/App';
+
+interface CardListProps {
+    cats: Array<Cat>;
+}
+
+
+const CardList = ({ cats }: CardListProps) => (
     <div className="card-list">
         { cats.length ?
-            cats.map(cat => 
+            cats.map((cat: Cat) => 
                 <Card
                     { ...cat }
                     key={ cat.id }

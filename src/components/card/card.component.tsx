@@ -1,6 +1,11 @@
 import './card.component.css';
 
-const Card = ({ id, name, email }) => (
+import { Cat } from '../../containers/App';
+
+interface CardProps extends Cat {}
+
+
+const Card = ({ id, name, email }: CardProps) => (
     <div className="card">
         <img
             src={ `https://robohash.org/${ id + 10 }?set=set4&size=140x140` }

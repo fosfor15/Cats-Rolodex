@@ -1,4 +1,4 @@
-import { useEffect, lazy } from 'react';
+import { useEffect, lazy, ChangeEvent } from 'react';
 
 import Header from '../components/header/Header';
 import SearchBox from '../components/search-field/search-box.component';
@@ -11,24 +11,53 @@ import { requestCats, setSearchField } from '../state/actions';
 const CardList = lazy(() => import('../components/card-list/card-list.component'));
 
 
+export interface Cat {
+    id: string;
+    name: string;
+    email: string;
+}
+
+interface requestCatsState {
+    isPending: boolean;
+    cats: Array<Cat>;
+    error: Error | null;
+}
+
+interface searchCatsState {
+    searchField: string;
+}
+
+interface State {
+    requestCats: requestCatsState;
+    searchCats: searchCatsState;
+}
+
+
 function App() {
-    const isPending = useSelector(state => state.requestCats.isPending);
-    const cats = useSelector(state => state.requestCats.cats);
-    const error = useSelector(state => state.requestCats.error);
-    const searchField = useSelector(state => state.searchCats.searchField);
+    const isPending: boolean = useSelector((state: State) => state.requestCats.isPending);
+    const cats: Array<Cat> = useSelector((state: State) => state.requestCats.cats);
+    const error: Error | null = useSelector((state: State) => state.requestCats.error);
+    const searchField: string = useSelector((state: State) => state.searchCats.searchField);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
+        // ToDo: решить задачу с аннотацией функции requestCats()
+        // @ts-ignore
         dispatch(requestCats());
     }, [ dispatch ]);
 
-    const handleSearchCat = (event) => dispatch(
-        setSearchField(event.target.value.toLowerCase())
-    );
+    const handleSearchCat = (event: ChangeEvent<HTMLInputElement>): void => {
+        dispatch(
+            setSearchField(event.target.value.toLowerCase())
+        );
+    };
 
-    const getFilteredCats = () => 
-        cats.filter(cat => cat.name.toLowerCase().includes(searchField));
+    const getFilteredCats = (): Array<Cat> => {
+        return cats.filter((cat: Cat) =>
+            cat.name.toLowerCase().includes(searchField)
+        );
+    };
 
     return (
         <div className="App">

@@ -2,8 +2,8 @@ import { applyMiddleware, createStore, combineReducers, compose } from 'redux';
 // import { logger } from 'redux-logger';
 import thunk from 'redux-thunk';
 
-import { searchCats } from './reducers';
-import { requestCats } from './reducers';
+import { searchCats, requestCats } from './reducers';
+
 
 const rootReducer = combineReducers({ searchCats, requestCats });
 
